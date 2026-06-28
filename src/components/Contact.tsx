@@ -143,60 +143,74 @@ export default function Contact() {
 
   return (
     <section className="section bg-bg dark:bg-dark text-text-primary dark:text-text-light transition-colors duration-300 relative" id="contact">
+      {/* Background decorations */}
+      <div className="absolute top-0 left-0 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(244,180,0,0.05) 0%, transparent 70%)" }} />
       <div className="container">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-20">
           <motion.span 
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-xs md:text-sm font-bold tracking-widest text-gold uppercase px-4 py-1.5 rounded-full border border-gold/30 bg-gold/5 inline-block"
+            className="section-label inline-flex"
           >
-            CONTACT & ENROLLMENT
+            Contact &amp; Enrollment
           </motion.span>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl md:text-5xl font-extrabold mt-4 mb-6 leading-tight font-display"
+            transition={{ duration: 0.6, delay: 0.08 }}
+            className="text-3xl md:text-5xl font-extrabold mt-5 leading-tight font-display"
           >
             Start Your Free <span className="gradient-text font-display">Demo Classes</span>
           </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.16 }}
+            className="section-divider mt-5"
+          />
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base md:text-lg text-text-light dark:text-text-light/80"
+            className="text-sm md:text-base text-text-light dark:text-slate-400 leading-relaxed mt-2"
           >
-            Fill out the form below, and we will get back to you within 24 hours. 
+            Fill out the form below and we will get back to you within 24 hours. 
             Alternatively, feel free to visit or contact any of our branches directly.
           </motion.p>
         </div>
 
         {/* Contact Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           
           {/* Left Column: Branch Locations & Info */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             
             {/* Quick Actions Panel */}
-            <div className="glass-card p-6 md:p-8 rounded-3xl border border-black/10 dark:border-white/10">
-              <h3 className="text-lg md:text-xl font-extrabold text-primary dark:text-white mb-6 flex items-center gap-2 font-display">
-                <School className="text-gold w-5 h-5" /> Quick Connect
+            <div className="glass-card p-7 md:p-8 rounded-3xl border border-black/8 dark:border-white/8 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+              <h3 className="text-lg md:text-xl font-extrabold text-primary dark:text-white mb-6 flex items-center gap-3 font-display">
+                <div className="p-2 rounded-xl bg-gold/12 border border-gold/20">
+                  <School className="text-gold w-4 h-4" />
+                </div>
+                Quick Connect
               </h3>
               
-              <div className="space-y-4">
+              <div className="space-y-3.5">
                 {/* Phone Call */}
-                <div className="flex gap-4 items-center bg-black/5 dark:bg-white/5 p-4 rounded-2xl">
-                  <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center text-gold shrink-0">
+                <div className="flex gap-4 items-center bg-primary/4 dark:bg-white/4 p-4 rounded-2xl border border-primary/5 dark:border-white/5 hover:border-gold/20 transition-colors group">
+                  <div className="w-11 h-11 rounded-xl bg-gold/10 border border-gold/15 flex items-center justify-center text-gold shrink-0 group-hover:bg-gold group-hover:text-primary transition-all">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-text-light dark:text-text-light/50">Call Center Helpline</p>
+                    <p className="text-[10px] uppercase font-bold text-text-lighter dark:text-slate-500 tracking-wider">Call Center Helpline</p>
                     <a href="tel:+919668580583" className="font-extrabold text-sm md:text-base text-primary dark:text-white hover:text-gold transition-colors">
                       +91 9668580583
                     </a>
@@ -204,12 +218,12 @@ export default function Contact() {
                 </div>
 
                 {/* WhatsApp Chat */}
-                <div className="flex gap-4 items-center bg-black/5 dark:bg-white/5 p-4 rounded-2xl">
-                  <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 shrink-0">
+                <div className="flex gap-4 items-center bg-primary/4 dark:bg-white/4 p-4 rounded-2xl border border-primary/5 dark:border-white/5 hover:border-green-500/20 transition-colors group">
+                  <div className="w-11 h-11 rounded-xl bg-green-500/10 border border-green-500/15 flex items-center justify-center text-green-500 shrink-0 group-hover:bg-green-500 group-hover:text-white transition-all">
                     <MessageCircle className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-text-light dark:text-text-light/50">WhatsApp Assistance</p>
+                    <p className="text-[10px] uppercase font-bold text-text-lighter dark:text-slate-500 tracking-wider">WhatsApp Assistance</p>
                     <a 
                       href="https://wa.me/919668580583?text=Hi%20Style%20Zone!%20I%2527d%20like%20to%20know%20more%20about%20your%20coaching%20timings." 
                       target="_blank" 
@@ -222,14 +236,14 @@ export default function Contact() {
                 </div>
 
                 {/* Office Hours */}
-                <div className="flex gap-4 items-center bg-black/5 dark:bg-white/5 p-4 rounded-2xl">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0">
+                <div className="flex gap-4 items-center bg-primary/4 dark:bg-white/4 p-4 rounded-2xl border border-primary/5 dark:border-white/5 hover:border-blue-500/20 transition-colors group">
+                  <div className="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/15 flex items-center justify-center text-blue-500 shrink-0 group-hover:bg-blue-500 group-hover:text-white transition-all">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-text-light dark:text-text-light/50">Working Hours</p>
+                    <p className="text-[10px] uppercase font-bold text-text-lighter dark:text-slate-500 tracking-wider">Working Hours</p>
                     <p className="font-bold text-sm text-primary dark:text-white">
-                      Mon - Sat: 3:00 PM - 9:00 PM
+                      Mon – Sat: 3:00 PM – 9:00 PM
                     </p>
                   </div>
                 </div>
@@ -300,31 +314,32 @@ export default function Contact() {
           <div className="lg:col-span-7 flex flex-col gap-6">
             
             {/* Inquiry Form */}
-            <div className="glass-card p-6 md:p-8 rounded-3xl border border-black/10 dark:border-white/10 relative overflow-hidden flex-1">
+            <div className="glass-card p-7 md:p-10 rounded-3xl border border-black/8 dark:border-white/8 relative overflow-hidden flex-1">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
               
               <AnimatePresence mode="wait">
                 {!isSuccess ? (
                   <motion.form
                     key="contact-form"
                     onSubmit={handleSubmit}
-                    className="space-y-4"
+                    className="space-y-5"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    <div className="mb-4">
-                      <h3 className="text-lg md:text-2xl font-extrabold text-primary dark:text-white font-display">
+                    <div className="mb-6">
+                      <h3 className="text-xl md:text-2xl font-extrabold text-primary dark:text-white font-display">
                         Online Admission Inquiry
                       </h3>
-                      <p className="text-xs text-text-light dark:text-text-light/70 mt-1">
-                        Please provide valid details so we can schedule the counseling session.
+                      <p className="text-sm text-text-light dark:text-slate-400 mt-1.5 leading-relaxed">
+                        Please provide valid details so we can schedule the counselling session.
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       {/* Student Name */}
-                      <div className="space-y-1">
-                        <label htmlFor="studentName" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wide">
+                      <div className="space-y-1.5">
+                        <label htmlFor="studentName" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wider flex items-center gap-1">
                           Student Name
                         </label>
                         <input
@@ -334,22 +349,22 @@ export default function Contact() {
                           value={formState.studentName}
                           onChange={handleInputChange}
                           placeholder="Enter student's full name"
-                          className={`w-full px-4 py-3 rounded-xl border bg-white dark:bg-dark text-sm focus:outline-none transition-all ${
+                          className={`w-full px-5 py-3.5 rounded-2xl border-[1.5px] bg-white/80 dark:bg-dark/80 text-sm focus:outline-none transition-all font-medium placeholder:text-text-lighter dark:placeholder:text-slate-600 ${
                             errors.studentName 
-                              ? "border-red-500 focus:ring-1 focus:ring-red-500" 
-                              : "border-black/10 dark:border-white/10 focus:border-gold"
+                              ? "border-red-400 focus:ring-3 focus:ring-red-500/15" 
+                              : "border-black/10 dark:border-white/10 focus:border-gold focus:ring-3 focus:ring-gold/12"
                           }`}
                         />
                         {errors.studentName && (
-                          <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1 mt-1">
-                            <AlertCircle className="w-3 h-3" /> {errors.studentName}
+                          <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1.5 mt-1">
+                            <AlertCircle className="w-3 h-3 flex-shrink-0" /> {errors.studentName}
                           </p>
                         )}
                       </div>
 
                       {/* Parent Name */}
-                      <div className="space-y-1">
-                        <label htmlFor="parentName" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wide">
+                      <div className="space-y-1.5">
+                        <label htmlFor="parentName" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wider">
                           Parent/Guardian Name
                         </label>
                         <input
@@ -359,24 +374,24 @@ export default function Contact() {
                           value={formState.parentName}
                           onChange={handleInputChange}
                           placeholder="Enter parent's full name"
-                          className={`w-full px-4 py-3 rounded-xl border bg-white dark:bg-dark text-sm focus:outline-none transition-all ${
+                          className={`w-full px-5 py-3.5 rounded-2xl border-[1.5px] bg-white/80 dark:bg-dark/80 text-sm focus:outline-none transition-all font-medium placeholder:text-text-lighter dark:placeholder:text-slate-600 ${
                             errors.parentName 
-                              ? "border-red-500 focus:ring-1 focus:ring-red-500" 
-                              : "border-black/10 dark:border-white/10 focus:border-gold"
+                              ? "border-red-400 focus:ring-3 focus:ring-red-500/15" 
+                              : "border-black/10 dark:border-white/10 focus:border-gold focus:ring-3 focus:ring-gold/12"
                           }`}
                         />
                         {errors.parentName && (
-                          <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1 mt-1">
-                            <AlertCircle className="w-3 h-3" /> {errors.parentName}
+                          <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1.5 mt-1">
+                            <AlertCircle className="w-3 h-3 flex-shrink-0" /> {errors.parentName}
                           </p>
                         )}
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       {/* Select Class */}
-                      <div className="space-y-1">
-                        <label htmlFor="className" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wide">
+                      <div className="space-y-1.5">
+                        <label htmlFor="className" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wider">
                           Target Class
                         </label>
                         <select
@@ -384,29 +399,29 @@ export default function Contact() {
                           name="className"
                           value={formState.className}
                           onChange={handleInputChange}
-                          className={`w-full px-4 py-3 rounded-xl border bg-white dark:bg-dark text-sm focus:outline-none transition-all cursor-pointer ${
+                          className={`w-full px-5 py-3.5 rounded-2xl border-[1.5px] bg-white/80 dark:bg-dark/80 text-sm focus:outline-none transition-all cursor-pointer font-medium ${
                             errors.className 
-                              ? "border-red-500 focus:ring-1 focus:ring-red-500" 
-                              : "border-black/10 dark:border-white/10 focus:border-gold"
+                              ? "border-red-400 focus:ring-3 focus:ring-red-500/15" 
+                              : "border-black/10 dark:border-white/10 focus:border-gold focus:ring-3 focus:ring-gold/12"
                           }`}
                         >
                           <option value="">Select Target Class</option>
-                          <option value="Class 6">Class 6 (English & Social Science)</option>
-                          <option value="Class 7">Class 7 (English & Social Science)</option>
-                          <option value="Class 8">Class 8 (English & Social Science)</option>
-                          <option value="Class 9">Class 9 (English & Social Science)</option>
+                          <option value="Class 6">Class 6 (English &amp; Social Science)</option>
+                          <option value="Class 7">Class 7 (English &amp; Social Science)</option>
+                          <option value="Class 8">Class 8 (English &amp; Social Science)</option>
+                          <option value="Class 9">Class 9 (English &amp; Social Science)</option>
                           <option value="Class 10">Class 10 (Board Exam Batch)</option>
                         </select>
                         {errors.className && (
-                          <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1 mt-1">
-                            <AlertCircle className="w-3 h-3" /> {errors.className}
+                          <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1.5 mt-1">
+                            <AlertCircle className="w-3 h-3 flex-shrink-0" /> {errors.className}
                           </p>
                         )}
                       </div>
 
                       {/* Phone Number */}
-                      <div className="space-y-1">
-                        <label htmlFor="phone" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wide">
+                      <div className="space-y-1.5">
+                        <label htmlFor="phone" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wider">
                           Phone Number
                         </label>
                         <input
@@ -416,23 +431,23 @@ export default function Contact() {
                           value={formState.phone}
                           onChange={handleInputChange}
                           placeholder="10-digit mobile number"
-                          className={`w-full px-4 py-3 rounded-xl border bg-white dark:bg-dark text-sm focus:outline-none transition-all ${
+                          className={`w-full px-5 py-3.5 rounded-2xl border-[1.5px] bg-white/80 dark:bg-dark/80 text-sm focus:outline-none transition-all font-medium placeholder:text-text-lighter dark:placeholder:text-slate-600 ${
                             errors.phone 
-                              ? "border-red-500 focus:ring-1 focus:ring-red-500" 
-                              : "border-black/10 dark:border-white/10 focus:border-gold"
+                              ? "border-red-400 focus:ring-3 focus:ring-red-500/15" 
+                              : "border-black/10 dark:border-white/10 focus:border-gold focus:ring-3 focus:ring-gold/12"
                           }`}
                         />
                         {errors.phone && (
-                          <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1 mt-1">
-                            <AlertCircle className="w-3 h-3" /> {errors.phone}
+                          <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1.5 mt-1">
+                            <AlertCircle className="w-3 h-3 flex-shrink-0" /> {errors.phone}
                           </p>
                         )}
                       </div>
                     </div>
 
                     {/* Message */}
-                    <div className="space-y-1">
-                      <label htmlFor="message" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wide">
+                    <div className="space-y-1.5">
+                      <label htmlFor="message" className="text-xs font-bold text-primary dark:text-white uppercase tracking-wider">
                         Inquiry Message
                       </label>
                       <textarea
@@ -442,15 +457,15 @@ export default function Contact() {
                         onChange={handleInputChange}
                         rows={4}
                         placeholder="Explain any specific learning challenges, targets, or preferred timings..."
-                        className={`w-full px-4 py-3 rounded-xl border bg-white dark:bg-dark text-sm focus:outline-none transition-all resize-none ${
+                        className={`w-full px-5 py-3.5 rounded-2xl border-[1.5px] bg-white/80 dark:bg-dark/80 text-sm focus:outline-none transition-all resize-none font-medium placeholder:text-text-lighter dark:placeholder:text-slate-600 ${
                           errors.message 
-                            ? "border-red-500 focus:ring-1 focus:ring-red-500" 
-                            : "border-black/10 dark:border-white/10 focus:border-gold"
+                            ? "border-red-400 focus:ring-3 focus:ring-red-500/15" 
+                            : "border-black/10 dark:border-white/10 focus:border-gold focus:ring-3 focus:ring-gold/12"
                         }`}
                       />
                       {errors.message && (
-                        <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1 mt-1">
-                          <AlertCircle className="w-3 h-3" /> {errors.message}
+                        <p className="text-[10px] text-red-500 font-semibold flex items-center gap-1.5 mt-1">
+                          <AlertCircle className="w-3 h-3 flex-shrink-0" /> {errors.message}
                         </p>
                       )}
                     </div>
@@ -460,7 +475,7 @@ export default function Contact() {
                       id="submit-inquiry-btn"
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn-primary w-full justify-center font-bold text-sm py-4 rounded-xl cursor-pointer disabled:opacity-50"
+                      className="btn-primary w-full justify-center font-black text-sm py-4 rounded-2xl cursor-pointer disabled:opacity-60"
                     >
                       {isSubmitting ? (
                         <>
