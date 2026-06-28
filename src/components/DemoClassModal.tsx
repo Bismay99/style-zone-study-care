@@ -12,7 +12,7 @@ interface DemoClassModalProps {
 export default function DemoClassModal({ isOpen, onClose }: DemoClassModalProps) {
   const [name, setName] = useState("");
   const [studentClass, setStudentClass] = useState("Class 10");
-  const [branch, setBranch] = useState("Paharkhana");
+  const [branch, setBranch] = useState("Pakharchhak");
   const [phone, setPhone] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -27,7 +27,7 @@ export default function DemoClassModal({ isOpen, onClose }: DemoClassModalProps)
       // Reset form states when closing
       setName("");
       setStudentClass("Class 10");
-      setBranch("Paharkhana");
+      setBranch("Pakharchhak");
       setPhone("");
       setIsSuccess(false);
       setIsSubmitting(false);
@@ -171,9 +171,9 @@ export default function DemoClassModal({ isOpen, onClose }: DemoClassModalProps)
                         onChange={(e) => setBranch(e.target.value)}
                         className="w-full px-3 py-2.5 rounded-xl border border-black/10 bg-white dark:border-white/10 dark:bg-dark-alt focus:outline-none focus:ring-2 focus:ring-gold text-sm text-text-primary dark:text-white transition-all cursor-pointer"
                       >
-                        <option value="Paharkhana">Paharkhana</option>
+                        <option value="Pakharchhak">Pakharchhak</option>
                         <option value="Treasury Colony">Treasury Colony</option>
-                        <option value="College Chhaka">College Chhaka</option>
+                        <option value="College Chhak">College Chhak</option>
                       </select>
                     </div>
                   </div>

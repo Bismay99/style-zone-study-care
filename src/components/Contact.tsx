@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Phone, 
@@ -11,7 +12,8 @@ import {
   CheckCircle2, 
   Navigation,
   School,
-  AlertCircle
+  AlertCircle,
+  Lock
 } from "lucide-react";
 
 interface FormState {
@@ -37,32 +39,43 @@ interface BranchInfo {
   landmark: string;
   mapQuery: string;
   embedSrc: string; // Iframe Google Maps embed source
+  mapUrl?: string;
+  image: string;
+  comingSoon?: boolean;
 }
 
 const branchesData: BranchInfo[] = [
   {
     id: "branch-1",
-    name: "Paharkhana (Zone 01)",
-    address: "Style Zone Building, Near Main Square, Paharkhana",
-    landmark: "Beside State Bank ATM",
-    mapQuery: "Paharkhana+Style+Zone+Study+Care",
-    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.64722883389!2d85.8340578!3d20.2527581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDE1JzA5LjkiTiA4NcKwNTAnMDIuNiJF!5e0!3m2!1sen!2sin!4v1719144882194!5m2!1sen!2sin"
+    name: "Pakharchhak Branch (Zone 01)",
+    address: "Style Zone Building, Near Main Square, Pakharchhak",
+    landmark: "Near Main Square",
+    mapQuery: "Pakharchhak+Style+Zone+Study+Care",
+    mapUrl: "https://maps.app.goo.gl/NLcBUpsfXTLuD2xs7",
+    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.64722883389!2d85.8340578!3d20.2527581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDE1JzA5LjkiTiA4NcKwNTAnMDIuNiJF!5e0!3m2!1sen!2sin!4v1719144882194!5m2!1sen!2sin",
+    image: "/images/classroom-1.png",
+    comingSoon: false
   },
   {
     id: "branch-2",
-    name: "Treasury Colony (Zone 02)",
+    name: "Treasury Colony Branch (Zone 02)",
     address: "Plot No. 42B, Behind State Treasury, Treasury Colony",
     landmark: "Near Head Post Office Road",
     mapQuery: "Treasury+Colony+Style+Zone+Study+Care",
-    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.801235122132!2d85.831024!3d20.245892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDE0JzQ1LjIiTiA4NcKwNDknNTEuNyJF!5e0!3m2!1sen!2sin!4v1719144933924!5m2!1sen!2sin"
+    mapUrl: "https://share.google/Y2VOk14IxDuLtBn3U",
+    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.801235122132!2d85.831024!3d20.245892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDE0JzQ1LjIiTiA4NcKwNDknNTEuNyJF!5e0!3m2!1sen!2sin!4v1719144933924!5m2!1sen!2sin",
+    image: "/images/classroom-2.png",
+    comingSoon: false
   },
   {
     id: "branch-3",
-    name: "College Chhaka (Zone 03)",
-    address: "First Floor, Metro Plaza, College Chhaka",
+    name: "College Chhak Branch (Zone 03)",
+    address: "First Floor, Metro Plaza, College Chhak",
     landmark: "Opposite Bank of India",
-    mapQuery: "College+Chhaka+Style+Zone+Study+Care",
-    embedSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3739.023419918239!2d85.828945!3d20.239012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDE0JzIwLjQiTiA4NcKwNDknNDQuMiJF!5e0!3m2!1sen!2sin!4v1719144973822!5m2!1sen!2sin"
+    mapQuery: "College+Chhak+Style+Zone+Study+Care",
+    embedSrc: "",
+    image: "/images/classroom-3.png",
+    comingSoon: true
   }
 ];
 
@@ -111,21 +124,26 @@ export default function Contact() {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    
-    // Simulate submission to server/WhatsApp trigger
+
+    // Build WhatsApp message with all inquiry details
+    const whatsappText =
+      `🎓 *New Admission Inquiry — Style Zone Study Care*\n\n` +
+      `👤 *Student Name:* ${formState.studentName}\n` +
+      `👨‍👩‍👦 *Parent/Guardian:* ${formState.parentName}\n` +
+      `📚 *Class Applied For:* ${formState.className}\n` +
+      `📞 *Contact Number:* ${formState.phone}\n` +
+      `🏫 *Preferred Branch:* ${selectedBranch.name}\n\n` +
+      `💬 *Message / Query:*\n${formState.message}\n\n` +
+      `_Submitted via Style Zone Study Care Website_`;
+
+    const whatsappUrl = `https://wa.me/919668580583?text=${encodeURIComponent(whatsappText)}`;
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
 
-      // We can also trigger WhatsApp redirect on submit if preferred
-      const whatsappText = `New Enrollment Inquiry:\n` +
-        `- Student: ${formState.studentName}\n` +
-        `- Parent: ${formState.parentName}\n` +
-        `- Class: ${formState.className}\n` +
-        `- Phone: ${formState.phone}\n` +
-        `- Query: ${formState.message}`;
-      
-      console.log("Form Submitted Successfully:", formState);
+      // Open WhatsApp with the pre-filled inquiry — delivers directly to Mrs. Nayak's phone
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     }, 1500);
   };
 
@@ -257,55 +275,124 @@ export default function Contact() {
                   Find Our Branches
                 </h3>
                 
-                {/* Quick tabs to select branch */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {branchesData.map((branch) => (
-                    <button
-                      key={branch.id}
-                      id={`branch-select-${branch.id}`}
-                      onClick={() => setSelectedBranch(branch)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold border cursor-pointer transition-all ${
-                        selectedBranch.id === branch.id
-                          ? "bg-secondary text-white border-transparent"
-                          : "bg-white dark:bg-dark text-text-light border-black/10 dark:border-white/10 hover:border-gold"
-                      }`}
-                    >
-                      {branch.name.split(" ")[0]}
-                    </button>
-                  ))}
+                {/* Branch Cards list */}
+                <div className="space-y-3 mb-6">
+                  {branchesData.map((branch) => {
+                    const isSelected = selectedBranch.id === branch.id;
+                    return (
+                      <button
+                        key={branch.id}
+                        id={`branch-card-${branch.id}`}
+                        onClick={() => setSelectedBranch(branch)}
+                        className={`w-full text-left p-4 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-3 cursor-pointer group ${
+                          isSelected
+                            ? "bg-gold/8 border-gold shadow-md shadow-gold/10"
+                            : "bg-white/50 dark:bg-dark-alt/50 border-black/10 dark:border-white/5 hover:border-gold/30 hover:bg-gold/5"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
+                            isSelected
+                              ? "bg-gold text-primary"
+                              : "bg-primary/5 dark:bg-white/5 text-primary dark:text-gold"
+                          }`}>
+                            {branch.comingSoon ? (
+                              <Lock className="w-4 h-4" />
+                            ) : (
+                              <MapPin className="w-4 h-4" />
+                            )}
+                          </div>
+                          <div>
+                            <h4 className="font-extrabold text-xs text-primary dark:text-white leading-snug">
+                              {branch.name.split(" Branch")[0]}
+                            </h4>
+                            <p className="text-[10px] text-text-light dark:text-slate-400 mt-0.5">
+                              {branch.comingSoon ? "🔑 Opening Soon" : "✨ Active Branch"}
+                            </p>
+                          </div>
+                        </div>
+                        {branch.comingSoon && (
+                          <span className="text-[9px] font-black uppercase tracking-wider bg-amber-500/10 text-amber-500 border border-amber-500/25 px-2 py-0.5 rounded-full">
+                            Soon
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Selected Branch Detail */}
-                <motion.div
-                  key={selectedBranch.id}
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-black/5 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5"
-                >
-                  <h4 className="font-bold text-sm text-primary dark:text-white mb-2 flex items-center gap-1.5">
-                    <MapPin className="text-gold w-4 h-4 shrink-0" />
-                    {selectedBranch.name} Branch
+                <div className="relative overflow-hidden rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 p-4">
+                  {/* Branch Image */}
+                  <div className="relative w-full h-32 rounded-xl overflow-hidden mb-4 border border-white/5 shadow-inner">
+                    <Image
+                      src={selectedBranch.image}
+                      alt={`${selectedBranch.name}`}
+                      fill
+                      className={`object-cover transition-all duration-500 ${
+                        selectedBranch.comingSoon ? "grayscale brightness-75 blur-[1.5px]" : ""
+                      }`}
+                    />
+                    {selectedBranch.comingSoon && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[0.5px]">
+                        <span className="text-white font-black text-xs uppercase tracking-wider bg-amber-500 px-3 py-1 rounded-full shadow-lg">
+                          🚧 Opening Soon
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <h4 className="font-bold text-sm text-primary dark:text-white mb-1.5 flex items-center gap-1.5">
+                    {selectedBranch.comingSoon ? (
+                      <Lock className="text-amber-500 w-4 h-4 shrink-0" />
+                    ) : (
+                      <MapPin className="text-gold w-4 h-4 shrink-0" />
+                    )}
+                    {selectedBranch.name}
                   </h4>
                   <p className="text-xs text-text-light dark:text-text-light/80 leading-relaxed">
-                    {selectedBranch.address}
+                    {selectedBranch.comingSoon
+                      ? "Admissions for this branch will open soon. Stay tuned!"
+                      : selectedBranch.address}
                   </p>
-                  <p className="text-[10px] text-gold font-bold mt-2 uppercase tracking-wide">
-                    Landmark: {selectedBranch.landmark}
-                  </p>
-                </motion.div>
+                  {!selectedBranch.comingSoon && (
+                    <p className="text-[10px] text-gold font-bold mt-2 uppercase tracking-wide">
+                      Landmark: {selectedBranch.landmark}
+                    </p>
+                  )}
+                </div>
               </div>
 
-              {/* Navigation button */}
-              <a
-                id={`navigate-branch-${selectedBranch.id}`}
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedBranch.name + " " + selectedBranch.address)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary w-full justify-center text-xs md:text-sm py-3 px-4 font-bold rounded-xl mt-6"
-              >
-                <Navigation className="w-4 h-4" /> Navigate on Google Maps
-              </a>
+              {/* Action Buttons */}
+              {selectedBranch.comingSoon ? (
+                <button
+                  disabled
+                  className="w-full justify-center text-xs md:text-sm py-3 px-4 font-bold rounded-xl mt-6 bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 border border-slate-300 dark:border-slate-700 cursor-not-allowed flex items-center gap-2"
+                >
+                  <Lock className="w-4 h-4" /> Coming Soon
+                </button>
+              ) : (
+                <div className="flex gap-2 mt-6">
+                  <a
+                    id={`navigate-branch-${selectedBranch.id}`}
+                    href={selectedBranch.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary flex-1 justify-center text-xs py-3 px-3 font-bold rounded-xl text-center flex items-center gap-1"
+                  >
+                    Get Directions
+                  </a>
+                  <a
+                    id={`book-demo-${selectedBranch.id}`}
+                    href={`https://wa.me/919668580583?text=${encodeURIComponent(`Hi! I'd like to book a free demo class for the ${selectedBranch.name}.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary flex-1 justify-center text-xs py-3 px-3 font-bold rounded-xl text-center flex items-center gap-1"
+                  >
+                    Book Demo
+                  </a>
+                </div>
+              )}
             </div>
 
           </div>
@@ -538,21 +625,53 @@ export default function Contact() {
 
             {/* Map Placement Frame Container */}
             <div className="glass-card p-2 rounded-3xl border border-black/10 dark:border-white/10 overflow-hidden h-[300px] relative group">
-              <div className="absolute top-4 left-4 z-10 bg-primary/95 text-white py-1.5 px-3 rounded-lg text-[10px] font-bold shadow-md uppercase tracking-wider backdrop-blur-md">
-                Showing Map: {selectedBranch.name.split(" ")[0]}
-              </div>
-              
-              <iframe
-                title={`Map of Style Zone Study Care - ${selectedBranch.name}`}
-                src={selectedBranch.embedSrc}
-                width="100%"
-                height="100%"
-                style={{ border: 0, borderRadius: "20px" }}
-                allowFullScreen={false}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale dark:invert contrast-[0.9] hover:grayscale-0 hover:invert-0 transition-all duration-500"
-              />
+              <AnimatePresence mode="wait">
+                {selectedBranch.comingSoon ? (
+                  <motion.div
+                    key="coming-soon-map"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full flex flex-col items-center justify-center text-center p-6 bg-black/5 dark:bg-white/5 rounded-[20px]"
+                  >
+                    <div className="w-14 h-14 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-4 text-2xl animate-pulse">
+                      🚧
+                    </div>
+                    <h4 className="text-base font-extrabold text-primary dark:text-white font-display mb-1.5">
+                      🚧 Opening Soon
+                    </h4>
+                    <p className="text-xs text-text-light dark:text-slate-400 max-w-xs leading-relaxed">
+                      Admissions for this branch will open soon. Stay tuned!
+                    </p>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={selectedBranch.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full relative"
+                  >
+                    <div className="absolute top-4 left-4 z-10 bg-primary/95 text-white py-1.5 px-3 rounded-lg text-[10px] font-bold shadow-md uppercase tracking-wider backdrop-blur-md">
+                      Showing Map: {selectedBranch.name.split(" Branch")[0]}
+                    </div>
+                    
+                    <iframe
+                      title={`Map of Style Zone Study Care - ${selectedBranch.name}`}
+                      src={selectedBranch.embedSrc}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0, borderRadius: "20px" }}
+                      allowFullScreen={false}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="grayscale dark:invert contrast-[0.9] hover:grayscale-0 hover:invert-0 transition-all duration-500"
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
           </div>

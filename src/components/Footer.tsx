@@ -11,6 +11,7 @@ import {
   ArrowUpRight,
   ChevronUp,
   ExternalLink,
+  Lock,
 } from "lucide-react";
 
 interface FooterProps {
@@ -59,19 +60,25 @@ export default function Footer({ onBookDemo }: FooterProps) {
 
   const branches = [
     {
-      name: "Paharkhana Branch",
-      address: "Style Zone Building, Near Main Square, Paharkhana",
-      mapQuery: "Style Zone Study Care Paharkhana",
+      name: "Pakharchhak Branch",
+      address: "Style Zone Building, Near Main Square, Pakharchhak",
+      mapQuery: "Pakharchhak Style Zone Study Care",
+      mapUrl: "https://maps.app.goo.gl/NLcBUpsfXTLuD2xs7",
+      comingSoon: false
     },
     {
       name: "Treasury Colony Branch",
       address: "Plot No. 42B, Behind State Treasury, Treasury Colony",
       mapQuery: "Treasury Colony Sambalpur",
+      mapUrl: "https://share.google/Y2VOk14IxDuLtBn3U",
+      comingSoon: false
     },
     {
-      name: "College Chhaka Branch",
-      address: "First Floor, Metro Plaza, College Chhaka",
-      mapQuery: "College Chhaka Sambalpur",
+      name: "College Chhak Branch",
+      address: "First Floor, Metro Plaza, College Chhak",
+      mapQuery: "College Chhak Sambalpur",
+      mapUrl: "",
+      comingSoon: true
     },
   ];
 
@@ -246,16 +253,22 @@ export default function Footer({ onBookDemo }: FooterProps) {
                     <span className="text-xs text-slate-400 leading-relaxed block mt-0.5">
                       {branch.address}
                     </span>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.mapQuery)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      id={`footer-map-${idx}`}
-                      className="inline-flex items-center gap-1 text-[10px] font-bold text-gold/70 hover:text-gold mt-1.5 transition-colors uppercase tracking-wider"
-                    >
-                      <ExternalLink className="w-3 h-3" />
-                      Google Maps
-                    </a>
+                    {branch.comingSoon ? (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-500 mt-1.5 uppercase tracking-wider">
+                        <Lock className="w-3 h-3" /> Coming Soon
+                      </span>
+                    ) : (
+                      <a
+                        href={branch.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id={`footer-map-${idx}`}
+                        className="inline-flex items-center gap-1 text-[10px] font-bold text-gold/70 hover:text-gold mt-1.5 transition-colors uppercase tracking-wider"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        Google Maps
+                      </a>
+                    )}
                   </div>
                 </li>
               ))}

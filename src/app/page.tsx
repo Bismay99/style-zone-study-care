@@ -37,7 +37,7 @@ export default function Home() {
         <Results />
         <Zones />
         <Testimonials />
-        <Gallery />
+        {/* <Gallery /> */}
         <AdmissionProcess onBookDemo={openDemoModal} />
         <FAQ />
         <Contact />

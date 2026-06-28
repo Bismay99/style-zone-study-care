@@ -120,7 +120,7 @@ interface Milestone {
 const milestones: Milestone[] = [
   {
     year: "2022",
-    title: "Founded in Paharkhana",
+    title: "Founded in Pakharchhak",
     description: "Started with a small batch of 15 students focusing on core English and Social Science foundations.",
   },
   {
@@ -131,7 +131,7 @@ const milestones: Milestone[] = [
   {
     year: "2024",
     title: "Expanded to 3 Branches",
-    description: "Opened Treasury Colony & College Chhaka zones to reach more students across the city.",
+    description: "Opened Treasury Colony & College Chhak zones to reach more students across the city.",
   },
   {
     year: "2025",

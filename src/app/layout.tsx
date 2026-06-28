@@ -74,8 +74,8 @@ const jsonLd = {
   address: [
     {
       "@type": "PostalAddress",
-      name: "Paharkhana Branch",
-      addressLocality: "Paharkhana",
+      name: "Pakharchhak Branch",
+      addressLocality: "Pakharchhak",
     },
     {
       "@type": "PostalAddress",
@@ -84,8 +84,8 @@ const jsonLd = {
     },
     {
       "@type": "PostalAddress",
-      name: "College Chhaka Branch",
-      addressLocality: "College Chhaka",
+      name: "College Chhak Branch",
+      addressLocality: "College Chhak",
     },
   ],
   sameAs: [],
